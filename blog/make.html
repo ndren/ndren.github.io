@@ -1,0 +1,22 @@
+<html>
+<head>
+  <title>Is nproc enough?</title>
+  <link rel="stylesheet" type="text/css" href="../styles.css">
+</head>
+<body>
+  <h2>Is nproc enough: How many jobs should make run?</h2>
+  <h3>Make is the ubiquitous UNIX build automation tool. For good reason! Its ergonomics with <code>make</code> and the commonly used targets <code>install</code> and <code>uninstall</code> makes compiling C easy. But what about performance?</h3>
+  <p>Here I will benchmark compiling Lua 5.4.3 with Make 4.3 using a different number of <code>--jobs</code> with GCC 11.1.0 on my timeless Thinkpad X240, with 8 GB of RAM and an i5-4300U CPU.</p>
+  <p><i>Hint: Don't forget to run make clean when benchmarking!</i></p>
+  <p>Note: I really wanted to try compiling with TCC, but the Makefile fails because it does not support the <code>-E</code> flag...</p>
+  <hr></hr>
+  <pre>make: 0m8.651s.
+  make --jobs $(nproc): 0m4.626s.
+  make --jobs $(expr $(nproc) + 1): 0m4.476s.
+  make --jobs $(expr $(nproc) + 2): 0m4.753s.
+  make --jobs $(expr $(nproc) + 3): 0m4.965s.
+  make --jobs: 0m4.736s.</pre>
+  <hr></hr>
+  <p>Very surprising results. To me, it suggests that nproc is not only enough, but the biggest risk to performace is not parallelising at all; even when the poor CPU had to deal with unlimited processes spawning, it was still only marginally slower than the optimal case. This suggests that the rule of thumb of having an extra process to read and write to disk does hold, though its slight advantage does not warrant the effort unless compile times go beyond a minute or two. Happy compiling!</p>
+</body>
+</html>

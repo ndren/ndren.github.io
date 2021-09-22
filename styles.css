@@ -1,0 +1,12 @@
+body {
+  background-color: black;
+  text-align: center;
+  font-family: arial, sans-serif;
+  color: white;
+}
+a, a:visited {
+  color: cornflowerblue;
+}
+a:hover {
+  color: darkslategray;
+}
