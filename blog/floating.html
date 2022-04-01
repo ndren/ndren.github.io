@@ -1,0 +1,24 @@
+<html>
+<head>
+  <title>Floating point arithmetic, or integrating 1/x</title>
+  <link rel="stylesheet" type="text/css" href="../styles.css">
+</head>
+<body>
+  <h2>Problem: Evaluate ln(x) without importing any libraries</h2>
+  <h3>Consider the following identity:</h3>
+  <pre>∫(1/x)dx≡ln(x)+c</pre>
+  <p>If we also define ln(1)=0 (as exp(0)=1), we end up with ln(x) as the definite integral from 1 to x of 1/x.</p>
+  <p>Now simply integrate 1/x≡x^(-1) with respect to x resulting in x^0/0+c and...</p>
+  <br>
+  <h3>Division by zero is not good.</h3>
+  <p>Let's try an approximation, 1/x≈1/x^0.999. Evaluating the integral with limits 0 and 1 gives ln(x)≈(x^0.001-1)/0.001.</p>
+  <p><i>Mathematicians do not like approximations.</i></p>
+  <p>Let's use a limit instead! ln(x)≡lim ε → 0 ((x^ε-1)/ε)</p>
+  <br>
+  <h3>Computers are bad with floats.</h3>
+  <p>We have not yet transcended into the realm of pure mathematics. Floating point arithmetic can lead to inaccurate results. Try the following:</p>
+  <p><code>python -c 'epsilon=10**-10; print((2**epsilon-1)/epsilon)'</code></p>
+  <p><code>python -c 'epsilon=10**-20; print((2**epsilon-1)/epsilon)'</code></p>
+  <p>With floating point accuracy, less is more. Use with care.</p>
+</body>
+</html>

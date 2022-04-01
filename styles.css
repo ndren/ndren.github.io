@@ -1,10 +1,10 @@
 body {
   background-color: black;
   text-align: center;
-  font-family: arial, sans-serif;
+  font-family: sans-serif;
   color: white;
 }
-a, a:visited {
+a {
   color: cornflowerblue;
 }
 a:hover {
